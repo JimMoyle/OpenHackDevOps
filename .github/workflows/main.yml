@@ -30,4 +30,7 @@ jobs:
          creds: ${{ secrets.AZURE_CREDENTIALS }}
          
       - run: |
-         az webapp list --query "[?state=='Running']"
+         echo "Building API-TRIPS image..."
+         echo "Changing directory to apis/trips..."
+         cd "apis/trips"
+         az acr build --image "devopsoh/api-trips:${{ github.sha }}" --registry openhackzkr4erh7acr --file Dockerfile .
